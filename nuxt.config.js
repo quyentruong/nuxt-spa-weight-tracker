@@ -55,12 +55,10 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/recaptcha'
   ],
-  // recaptcha: {
-  //   hideBadge: Boolean, // Hide badge element (v3)
-  //   language: String, // Recaptcha language (v2)
-  //   siteKey: String, // Site key for requests
-  //   version: Number // Version
-  // },
+  recaptcha: {
+    siteKey: '6LdA47AUAAAAAHgoSOBrxHt_gpgtvodDhBs9Atl4', // Site key for requests
+    version: 2 // Version
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
