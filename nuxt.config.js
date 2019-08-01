@@ -1,6 +1,14 @@
 import colors from 'vuetify/es5/util/colors'
 
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/nuxt-spa-weight-tracker/'
+  }
+} : {}
+
 export default {
+  ...routerBase,
   mode: 'spa',
   /*
   ** Headers of the page
@@ -14,7 +22,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? '/nuxt-spa-weight-tracker' : ''}/favicon.ico` }
     ]
   },
   /*
@@ -29,7 +37,7 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
+  plugins: ['~/plugins/vue-apexcharts.client'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,8 +52,15 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/recaptcha'
   ],
+  // recaptcha: {
+  //   hideBadge: Boolean, // Hide badge element (v3)
+  //   language: String, // Recaptcha language (v2)
+  //   siteKey: String, // Site key for requests
+  //   version: Number // Version
+  // },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
