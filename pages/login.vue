@@ -33,6 +33,12 @@
               type="password"
               :error-messages="modelstate['Password']"
             />
+
+            <recaptcha
+              @error="onError"
+              @success="onSuccess"
+              @expired="onExpired"
+            />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -55,13 +61,29 @@ export default {
     password: ''
   }),
   methods: {
-    Login () {
+    onError (error) {
+      console.log('Error happened:', error)
+    },
+    onSuccess (token) {
+      console.log('Succeeded:', token)
+    },
+    onExpired () {
+      console.log('Expired')
+    },
+    async Login () {
+      try {
+        const token = await this.$recaptcha.getResponse()
+        console.log('ReCaptcha token:', token)
+      } catch (error) {
+        console.log('Login error:', error)
+        return
+      }
       this.modelstate = {}
       const data = {
         Email: this.email,
         Password: this.password
       }
-      this.$axios.$post('https://localhost:5001/api/track/login', data).then((response) => {
+      this.$axios.$post('https://trackapi2.azurewebsites.net/api/user/login', data).then((response) => {
         alert('Success')
       })
         .catch((error) => {
