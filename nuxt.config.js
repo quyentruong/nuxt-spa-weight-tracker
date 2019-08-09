@@ -22,7 +22,11 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? '/nuxt-spa-weight-tracker' : ''}/favicon.ico` }
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? '/nuxt-spa-weight-tracker' : ''}/favicon.ico`
+      }
     ]
   },
   /*
@@ -32,8 +36,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
   /*
   ** Plugins to load before mounting the App
   */
@@ -63,8 +66,7 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {
-  },
+  axios: {},
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

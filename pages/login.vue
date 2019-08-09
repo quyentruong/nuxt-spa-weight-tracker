@@ -34,14 +34,17 @@
               :error-messages="modelstate['Password']"
             />
 
-            <recaptcha
-              @error="onError"
-              @success="onSuccess"
-              @expired="onExpired"
-            />
+<!--            <recaptcha-->
+<!--              @error="onError"-->
+<!--              @success="onSuccess"-->
+<!--              @expired="onExpired"-->
+<!--            />-->
           </v-form>
         </v-card-text>
         <v-card-actions>
+          <v-btn color="primary" to="register">
+            Register
+          </v-btn>
           <v-spacer />
           <v-btn color="primary" @click="Login">
             Login
@@ -61,29 +64,30 @@ export default {
     password: ''
   }),
   methods: {
-    onError (error) {
-      console.log('Error happened:', error)
-    },
-    onSuccess (token) {
-      console.log('Succeeded:', token)
-    },
-    onExpired () {
-      console.log('Expired')
-    },
-    async Login () {
-      try {
-        const token = await this.$recaptcha.getResponse()
-        console.log('ReCaptcha token:', token)
-      } catch (error) {
-        console.log('Login error:', error)
-        return
-      }
+    // onError (error) {
+    //   console.log('Error happened:', error)
+    // },
+    // onSuccess (token) {
+    //   console.log('Succeeded:', token)
+    // },
+    // onExpired () {
+    //   console.log('Expired')
+    // },
+    Login () {
+      // try {
+      //   const token = await this.$recaptcha.getResponse()
+      //   console.log('ReCaptcha token:', token)
+      // } catch (error) {
+      //   console.log('Login error:', error)
+      //   return
+      // }
       this.modelstate = {}
       const data = {
         Email: this.email,
         Password: this.password
       }
-      this.$axios.$post('https://trackapi2.azurewebsites.net/api/user/login', data).then((response) => {
+
+      this.$axios.$post(`https://trackapi2.azurewebsites.net/api/user/login`, data).then((response) => {
         alert('Success')
       })
         .catch((error) => {

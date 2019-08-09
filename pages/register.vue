@@ -8,6 +8,7 @@
       sm8
       md4
     >
+<!--      <v-alert type="success">asas</v-alert>-->
       <v-card class="elevation-12">
         <v-toolbar
           color="primary"
@@ -65,7 +66,7 @@
                 ref="picker"
                 v-model="date"
                 :max="new Date().toISOString().substr(0, 10)"
-                min="1950-01-01"
+                min="1900-01-01"
                 @change="save"
               />
             </v-menu>
@@ -107,11 +108,12 @@ export default {
         Password: this.password,
         BirthDay: this.date
       }
-      this.$axios.$post('https://trackapi2.azurewebsites.net/api/user/register', data).then((response) => {
+      this.$axios.$post('https://trackapi2.azurewebsites.net/api/User/Register', data).then((response) => {
         alert('Success')
       })
         .catch((error) => {
           if (error.response.status === 400) {
+            console.log(error.response.data)
             this.modelstate = error.response.data.errors
           }
         })
