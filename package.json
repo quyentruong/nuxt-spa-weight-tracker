@@ -19,12 +19,14 @@
     "@nuxtjs/recaptcha": "^0.5.3",
     "apexcharts": "^3.8.3",
     "nuxt": "^2.0.0",
-    "vue-apexcharts": "^1.4.0"
+    "store": "^2.0.12",
+    "vue-apexcharts": "^1.4.0",
+    "vue-warehouse": "^1.0.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^0.2.1",
-    "@nuxtjs/vuetify": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.2.1",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.15.1",

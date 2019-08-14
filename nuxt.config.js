@@ -56,7 +56,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/recaptcha'
+    '@nuxtjs/recaptcha',
+    'vue-warehouse/nuxt'
   ],
   recaptcha: {
     siteKey: '6LdA47AUAAAAAHgoSOBrxHt_gpgtvodDhBs9Atl4', // Site key for requests

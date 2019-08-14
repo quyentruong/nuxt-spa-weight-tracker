@@ -37,6 +37,11 @@
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
+      <v-spacer />
+      <v-toolbar-title v-text="user" />
+      <v-btn icon color="gray">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -47,7 +52,7 @@
       :fixed="fixed"
       app
     >
-      <span>&copy; 2019</span>
+      <span>&copy; 2019 Quyen Truong</span>
     </v-footer>
   </v-app>
 </template>
@@ -74,7 +79,8 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Tracker',
+      user: 'Anonymous'
     }
   }
 }

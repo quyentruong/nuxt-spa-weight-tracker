@@ -34,11 +34,11 @@
               :error-messages="modelstate['Password']"
             />
 
-<!--            <recaptcha-->
-<!--              @error="onError"-->
-<!--              @success="onSuccess"-->
-<!--              @expired="onExpired"-->
-<!--            />-->
+            <!--            <recaptcha-->
+            <!--              @error="onError"-->
+            <!--              @success="onSuccess"-->
+            <!--              @expired="onExpired"-->
+            <!--            />-->
           </v-form>
         </v-card-text>
         <v-card-actions>

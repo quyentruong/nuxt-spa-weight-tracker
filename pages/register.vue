@@ -8,7 +8,7 @@
       sm8
       md4
     >
-<!--      <v-alert type="success">asas</v-alert>-->
+      <!--      <v-alert type="success">asas</v-alert>-->
       <v-card class="elevation-12">
         <v-toolbar
           color="primary"
@@ -73,6 +73,9 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
+          <v-btn color="primary" to="login">
+            Back to Login
+          </v-btn>
           <v-spacer />
           <v-btn color="primary" @click="Submit">
             Submit
