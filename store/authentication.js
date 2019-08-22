@@ -1,4 +1,6 @@
 export const state = () => ({
-  authenticated: false
+  authenticated: false,
+  user: '',
+  tracks: ''
   // category: 'animal'
 })

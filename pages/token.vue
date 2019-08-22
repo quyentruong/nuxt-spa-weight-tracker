@@ -19,19 +19,10 @@
         <v-card-text>
           <v-form>
             <v-text-field
-              v-model="email"
+              v-model="token"
               label="Email"
               prepend-icon="mdi-email"
               type="email"
-              :error-messages="modelstate['Email']"
-            />
-
-            <v-text-field
-              v-model="password"
-              label="Password"
-              prepend-icon="mdi-lock"
-              type="password"
-              :error-messages="modelstate['Password']"
             />
 
             <!--            <recaptcha-->
@@ -57,41 +48,24 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Token',
   data: () => ({
     modelstate: {},
-    email: '',
-    password: ''
+    token: ''
+
   }),
   methods: {
-    // onError (error) {
-    //   console.log('Error happened:', error)
-    // },
-    // onSuccess (token) {
-    //   console.log('Succeeded:', token)
-    // },
-    // onExpired () {
-    //   console.log('Expired')
-    // },
     Login () {
-      // try {
-      //   const token = await this.$recaptcha.getResponse()
-      //   console.log('ReCaptcha token:', token)
-      // } catch (error) {
-      //   console.log('Login error:', error)
-      //   return
-      // }
       this.modelstate = {}
-      const data = {
-        Email: this.email,
-        Password: this.password
-      }
+      // const data = this.token
 
-      this.$axios.$post(`https://localhost:5001/api/user/login`, data).then((response) => {
+      this.$axios.$post(`https://localhost:5001/api/user/VerifyToken`, { token: this.token }).then((response) => {
         alert('Success')
       })
         .catch((error) => {
           if (error.response.status === 400) {
+            // eslint-disable-next-line no-console
+            console.log(error.response.data)
             this.modelstate = error.response.data.errors
           }
         })
