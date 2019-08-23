@@ -4,8 +4,15 @@ import colors from 'vuetify/es5/util/colors'
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: '/nuxt-spa-weight-tracker/'
+  },
+  axios: {
+    baseURL: 'https://trackapi2.azurewebsites.net'
   }
-} : {}
+} : {
+  axios: {
+    baseURL: 'https://localhost:5001'
+  }
+}
 
 export default {
   ...routerBase,
@@ -57,7 +64,9 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/recaptcha',
-    'vue-warehouse/nuxt'
+    ['vue-warehouse/nuxt', {
+      vuex: true
+    }]
   ],
   recaptcha: {
     siteKey: '6LdA47AUAAAAAHgoSOBrxHt_gpgtvodDhBs9Atl4', // Site key for requests
@@ -67,7 +76,7 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  // axios: {},
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

@@ -87,12 +87,13 @@ export default {
         Password: this.password
       }
 
-      this.$axios.$post(`https://localhost:5001/api/user/login`, data).then((response) => {
-        alert('Success')
+      this.$axios.$post(`/api/user/login`, data).then((response) => {
+        this.$warehouse.set('user', response)
       })
         .catch((error) => {
           if (error.response.status === 400) {
             this.modelstate = error.response.data.errors
+            // this.$store.commit('setAuthentication', true)
           }
         })
     }
