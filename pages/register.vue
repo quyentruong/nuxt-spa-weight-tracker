@@ -111,7 +111,7 @@ export default {
         Password: this.password,
         BirthDay: this.date
       }
-      this.$axios.$post('https://trackapi2.azurewebsites.net/api/User/Register', data).then((response) => {
+      this.$axios.$post('/api/User/Register', data).then((response) => {
         alert('Success')
       })
         .catch((error) => {
