@@ -1,11 +1,18 @@
 import colors from 'vuetify/es5/util/colors'
 
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+const routerBase = process.env.NODE_ENV !== 'development' ? {
   router: {
     base: '/nuxt-spa-weight-tracker/'
+  },
+  env: {
+    baseURL: 'https://trackapi2.azurewebsites.net'
   }
-} : {}
+} : {
+  env: {
+    baseURL: 'https://localhost:5001'
+  }
+}
 
 export default {
   ...routerBase,
