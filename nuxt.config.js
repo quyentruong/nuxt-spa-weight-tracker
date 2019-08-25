@@ -10,7 +10,7 @@ const routerBase = process.env.NODE_ENV !== 'development' ? {
   }
 } : {
   env: {
-    baseURL: 'https://localhost:5001'
+    baseURL: 'https://trackapi2.azurewebsites.net'
   }
 }
 
@@ -77,7 +77,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://localhost:5001'}`
+    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://trackapi2.azurewebsites.net'}`
   },
   /*
   ** vuetify module configuration

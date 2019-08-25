@@ -38,8 +38,8 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-toolbar-title v-text="user" />
-      <v-btn icon color="gray">
+      <v-toolbar-title v-text="currentUser" />
+      <v-btn icon color="gray" @click="logOut">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-app-bar>
@@ -80,8 +80,20 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Tracker',
-      user: 'Anonymous'
+      user: ''
+    }
+  },
+  computed: {
+    currentUser () {
+      return this.$warehouse.get('user') === undefined ? 'A' : this.$warehouse.get('user').name
+    }
+  },
+  methods: {
+    logOut () {
+      this.$warehouse.remove('user')
+      if (this.$router.currentRoute.path !== '/login') { this.$router.push('/login') }
     }
   }
+
 }
 </script>

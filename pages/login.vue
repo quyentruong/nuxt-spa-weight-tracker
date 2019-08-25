@@ -51,14 +51,20 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-snackbar v-model="loginShow" color="blue" :timeout="0">
+        Please wait ...
+      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import authenticated from '../middleware/authenticated'
 export default {
+  middleware: authenticated,
   name: 'Login',
   data: () => ({
+    loginShow: false,
     modelstate: {},
     email: '',
     password: ''
@@ -73,7 +79,7 @@ export default {
     // onExpired () {
     //   console.log('Expired')
     // },
-    Login () {
+    async Login () {
       // try {
       //   const token = await this.$recaptcha.getResponse()
       //   console.log('ReCaptcha token:', token)
@@ -81,21 +87,23 @@ export default {
       //   console.log('Login error:', error)
       //   return
       // }
+      this.loginShow = true
       this.modelstate = {}
       const data = {
         Email: this.email,
         Password: this.password
       }
-
-      this.$axios.$post(`/api/user/login`, data).then((response) => {
+      try {
+        const response = await this.$axios.$post(`/api/user/login`, data)
         this.$warehouse.set('user', response)
-      })
-        .catch((error) => {
-          if (error.response.status === 400) {
-            this.modelstate = error.response.data.errors
-            // this.$store.commit('setAuthentication', true)
-          }
-        })
+        await this.$router.push('/')
+      } catch (error) {
+        if (error.response.status === 400) {
+          this.modelstate = error.response.data.errors
+          // this.$store.commit('setAuthentication', true)
+        }
+      }
+      this.loginShow = false
     }
   }
 }
