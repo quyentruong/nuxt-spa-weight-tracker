@@ -1,3 +1,4 @@
+// https://materialdesignicons.com/
 import colors from 'vuetify/es5/util/colors'
 
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
@@ -10,7 +11,7 @@ const routerBase = process.env.NODE_ENV !== 'development' ? {
   }
 } : {
   env: {
-    baseURL: 'https://trackapi2.azurewebsites.net'
+    baseURL: 'https://localhost:5001'
   }
 }
 
@@ -77,7 +78,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://trackapi2.azurewebsites.net'}`
+    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://localhost:5001'}`
   },
   /*
   ** vuetify module configuration

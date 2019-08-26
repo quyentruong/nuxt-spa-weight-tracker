@@ -8,39 +8,28 @@
       sm8
       md4
     >
-      <!--      <v-alert type="success">asas</v-alert>-->
       <v-card class="elevation-12">
         <v-toolbar
           color="primary"
           dark
           flat
         >
-          <v-toolbar-title>Register form</v-toolbar-title>
+          <v-toolbar-title>Your Profile</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
           <v-form>
-            <v-text-field
-              v-model="fullName"
-              label="Full Name"
-              prepend-icon="mdi-account"
-              type="text"
-              :error-messages="modelstate['Name']"
-            />
-
             <v-text-field
               v-model="email"
               label="Email"
               prepend-icon="mdi-email"
               type="email"
-              :error-messages="modelstate['Email']"
+              disabled
             />
 
             <v-text-field
-              v-model="password"
-              label="Password"
-              prepend-icon="mdi-lock"
-              type="password"
-              :error-messages="modelstate['Password']"
+              v-model="fullname"
+              prepend-icon="mdi-account"
+              type="text"
             />
 
             <v-menu
@@ -73,55 +62,50 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" to="login">
-            Back to Login
-          </v-btn>
-          <v-spacer />
           <v-btn color="primary" @click="Submit">
             Submit
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-snackbar v-model="showInfo" color="info" :right="true">
+        <v-icon>mdi-alert-circle-outline</v-icon>
+        <span>This feature will be implemented later</span>
+      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import authenticated from '../middleware/authenticated'
+
 export default {
-  name: 'Register',
+  middleware: authenticated,
+  name: 'Profile',
   data: () => ({
+    loginShow: false,
     modelstate: {},
-    date: null,
+    email: '',
+    fullname: '',
     menu: false,
-    fullName: '',
-    password: '',
-    email: ''
+    date: null,
+    showInfo: false
   }),
   watch: {
     menu (val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
     }
   },
+  created () {
+    this.email = this.$warehouse.get('user').email
+    this.fullname = this.$warehouse.get('user').name
+    this.date = new Date(this.$warehouse.get('user').birthDay).toISOString().substr(0, 10)
+  },
   methods: {
-    Submit () {
-      this.modelstate = {}
-      const data = {
-        Name: this.fullName,
-        Email: this.email,
-        Password: this.password,
-        BirthDay: this.date
-      }
-      this.$axios.$post('/api/User/Register', data).then((response) => {
-        alert('Success')
-      })
-        .catch((error) => {
-          if (error.response.status === 400) {
-            this.modelstate = error.response.data.errors
-          }
-        })
-    },
     save (date) {
       this.$refs.menu.save(date)
+    },
+    Submit () {
+      this.showInfo = true
     }
   }
 }

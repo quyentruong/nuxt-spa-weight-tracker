@@ -24,6 +24,7 @@
               prepend-icon="mdi-email"
               type="email"
               :error-messages="modelstate['Email']"
+              @keyup.enter="Login"
             />
 
             <v-text-field
@@ -32,6 +33,7 @@
               prepend-icon="mdi-lock"
               type="password"
               :error-messages="modelstate['Password']"
+              @keyup.enter="Login"
             />
 
             <!--            <recaptcha-->
@@ -97,6 +99,7 @@ export default {
         const response = await this.$axios.$post(`/api/user/login`, data)
         this.$warehouse.set('user', response)
         await this.$router.push('/')
+        location.reload()
       } catch (error) {
         if (error.response.status === 400) {
           this.modelstate = error.response.data.errors

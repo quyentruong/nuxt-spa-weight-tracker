@@ -38,7 +38,7 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-toolbar-title v-text="currentUser" />
+      <v-toolbar-title v-text="user" />
       <v-btn icon color="gray" @click="logOut">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -71,6 +71,11 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-account-circle',
+          title: 'Profile',
+          to: '/profile'
+        },
+        {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
@@ -83,15 +88,15 @@ export default {
       user: ''
     }
   },
-  computed: {
-    currentUser () {
-      return this.$warehouse.get('user') === undefined ? 'A' : this.$warehouse.get('user').name
-    }
+
+  created () {
+    this.user = this.$warehouse.get('user') === undefined ? 'Unsigned' : this.$warehouse.get('user').name
   },
   methods: {
     logOut () {
       this.$warehouse.remove('user')
       if (this.$router.currentRoute.path !== '/login') { this.$router.push('/login') }
+      location.reload()
     }
   }
 

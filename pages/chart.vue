@@ -3,9 +3,7 @@
     <v-layout>
       <v-flex>
         <div id="chart">
-          <no-ssr>
-            <apexchart type="line" height="350" :options="chartOptions" :series="series" />
-          </no-ssr>
+          <apexchart type="line" height="350" :options="chartOptions" :series="series" />
         </div>
       </v-flex>
     </v-layout>
@@ -17,7 +15,7 @@
 export default {
   data: () => ({
     series: [{
-      name: 'Desktops',
+      name: 'BMI',
       data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
     }],
     chartOptions: {
@@ -57,7 +55,15 @@ export default {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
       }
     }
-  })
+  }),
+  created () {
+    const tracks = this.$warehouse.get('user').tracks
+    const data = []
+    for (let i = 0; i < tracks.length; i++) {
+      data.push(Math.round(tracks[i].bmi))
+    }
+    this.series[0].data = data
+  }
 
 }
 </script>
