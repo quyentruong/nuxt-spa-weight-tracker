@@ -17,3 +17,10 @@
     </v-flex>
   </v-layout>
 </template>
+<script>
+import authenticated from '../middleware/authenticated'
+
+export default {
+  middleware: authenticated
+}
+</script>
