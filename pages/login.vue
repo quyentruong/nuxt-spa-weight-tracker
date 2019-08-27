@@ -44,8 +44,8 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" to="register">
-            Register
+          <v-btn color="primary" to="/register">
+            Go to Register
           </v-btn>
           <v-spacer />
           <v-btn color="primary" @click="Login">

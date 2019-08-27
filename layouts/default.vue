@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -96,7 +96,7 @@ export default {
     logOut () {
       this.$warehouse.remove('user')
       if (this.$router.currentRoute.path !== '/login') { this.$router.push('/login') }
-      location.reload()
+      // location.reload()
     }
   }
 
