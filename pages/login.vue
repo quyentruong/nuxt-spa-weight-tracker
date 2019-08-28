@@ -98,8 +98,6 @@ export default {
       try {
         const response = await this.$axios.$post(`/api/user/login`, data)
         this.$warehouse.set('user', response)
-        await this.$router.push('/')
-        location.reload()
       } catch (error) {
         if (error.response.status === 400) {
           this.modelstate = error.response.data.errors
