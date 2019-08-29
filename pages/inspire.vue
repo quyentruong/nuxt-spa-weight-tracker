@@ -18,9 +18,8 @@
   </v-layout>
 </template>
 <script>
-import authenticated from '../middleware/authenticated'
 
 export default {
-  middleware: authenticated
+  name: 'Inspire'
 }
 </script>

@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import authenticated from '../middleware/authenticated'
+
 export default {
-  middleware: authenticated,
+  auth: 'guest',
   name: 'Login',
   data: () => ({
     loginShow: false,
@@ -81,7 +81,7 @@ export default {
     // onExpired () {
     //   console.log('Expired')
     // },
-    async Login () {
+    Login () {
       // try {
       //   const token = await this.$recaptcha.getResponse()
       //   console.log('ReCaptcha token:', token)
@@ -95,15 +95,17 @@ export default {
         Email: this.email,
         Password: this.password
       }
-      try {
-        const response = await this.$axios.$post(`/api/user/login`, data)
-        this.$warehouse.set('user', response)
-      } catch (error) {
-        if (error.response.status === 400) {
-          this.modelstate = error.response.data.errors
-          // this.$store.commit('setAuthentication', true)
-        }
-      }
+      this.$auth.loginWith('local', { data })
+        .then(() => console.log('success'))
+      // try {
+      //   const response = await this.$axios.$post(`/api/user/login`, data)
+      //   this.$warehouse.set('user', response)
+      // } catch (error) {
+      //   if (error.response.status === 400) {
+      //     this.modelstate = error.response.data.errors
+      //     // this.$store.commit('setAuthentication', true)
+      //   }
+      // }
       this.loginShow = false
     }
   }

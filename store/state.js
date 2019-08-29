@@ -1,6 +1,6 @@
 export default () => ({
-  authentication: false,
-  user: '',
-  tracks: ''
+  // authentication: false,
+  // user: '',
+  // tracks: ''
   // category: 'animal'
 })

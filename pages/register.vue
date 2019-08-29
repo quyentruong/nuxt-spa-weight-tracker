@@ -88,6 +88,7 @@
 
 <script>
 export default {
+  auth: 'guest',
   name: 'Register',
   data: () => ({
     modelstate: {},

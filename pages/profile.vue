@@ -76,10 +76,8 @@
 </template>
 
 <script>
-import authenticated from '../middleware/authenticated'
 
 export default {
-  middleware: authenticated,
   name: 'Profile',
   data: () => ({
     loginShow: false,

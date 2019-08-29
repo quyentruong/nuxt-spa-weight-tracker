@@ -4,7 +4,8 @@ import colors from 'vuetify/es5/util/colors'
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
 const routerBase = process.env.NODE_ENV !== 'development' ? {
   router: {
-    base: '/nuxt-spa-weight-tracker/'
+    base: '/nuxt-spa-weight-tracker/',
+    middleware: ['auth']
   },
   env: {
     baseURL: 'https://trackapi2.azurewebsites.net'
@@ -12,6 +13,9 @@ const routerBase = process.env.NODE_ENV !== 'development' ? {
 } : {
   env: {
     baseURL: 'https://localhost:5001'
+  },
+  router: {
+    middleware: ['auth']
   }
 }
 
@@ -64,6 +68,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/recaptcha',
     ['vue-warehouse/nuxt', {
       vuex: true
@@ -79,6 +84,25 @@ export default {
   */
   axios: {
     baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://localhost:5001'}`
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/user/login', method: 'post', propertyName: 'token' },
+          user: { url: '/api/user/GetCurrentUser', method: 'get', propertyName: false },
+          logout: false
+        }
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    },
+    watchLoggedIn: true,
+    resetOnError: true
   },
   /*
   ** vuetify module configuration
