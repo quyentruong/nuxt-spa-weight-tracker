@@ -66,6 +66,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/toast',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
@@ -77,6 +78,20 @@ export default {
   recaptcha: {
     siteKey: '6LdA47AUAAAAAHgoSOBrxHt_gpgtvodDhBs9Atl4', // Site key for requests
     version: 2 // Version
+  },
+  toast: {
+    position: 'bottom-center',
+    duration: 5000,
+    iconPack: 'mdi',
+    register: [ // Register custom toasts
+      {
+        name: 'my_error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
   },
   /*
   ** Axios module configuration
@@ -97,7 +112,7 @@ export default {
     },
     redirect: {
       login: '/login',
-      logout: '/',
+      logout: '/login',
       callback: '/login',
       home: '/'
     },

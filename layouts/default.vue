@@ -38,10 +38,16 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-toolbar-title v-text="user" />
-      <v-btn icon color="gray" @click="logOut">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
+      <template v-if="$auth.$state.loggedIn">
+        <v-btn @click="logOut">
+          Logout
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-btn to="/login">
+          Login
+        </v-btn>
+      </template>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -93,10 +99,11 @@ export default {
     this.user = this.$warehouse.get('user') === undefined ? 'Unsigned' : this.$warehouse.get('user').name
   },
   methods: {
-    logOut () {
-      this.$warehouse.remove('user')
-      if (this.$router.currentRoute.path !== '/login') { this.$router.push('/login') }
-      // location.reload()
+    async logOut () {
+      this.$toast.show('Logging out...', { icon: 'check' })
+      await this.$auth.logout('local')
+      // this.$warehouse.remove('user')
+      // if (this.$router.currentRoute.path !== '/login') { this.$router.push('/login') }
     }
   }
 

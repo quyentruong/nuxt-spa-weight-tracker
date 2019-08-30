@@ -53,9 +53,6 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-      <v-snackbar v-model="loginShow" color="blue" :timeout="0">
-        Please wait ...
-      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
@@ -66,7 +63,7 @@ export default {
   auth: 'guest',
   name: 'Login',
   data: () => ({
-    loginShow: false,
+
     modelstate: {},
     email: '',
     password: ''
@@ -81,7 +78,7 @@ export default {
     // onExpired () {
     //   console.log('Expired')
     // },
-    Login () {
+    async Login () {
       // try {
       //   const token = await this.$recaptcha.getResponse()
       //   console.log('ReCaptcha token:', token)
@@ -89,14 +86,23 @@ export default {
       //   console.log('Login error:', error)
       //   return
       // }
-      this.loginShow = true
+      this.$toast.show('Logging in...', { icon: 'timer-sand-empty' })
+
       this.modelstate = {}
       const data = {
         Email: this.email,
         Password: this.password
       }
-      this.$auth.loginWith('local', { data })
-        .then(() => console.log('success'))
+      await this.$auth.loginWith('local', { data })
+        .then(() => this.$toast.success('Successfully authenticated', { icon: 'check-bold' }))
+        .catch((error) => {
+          if (error.response.status === 400) {
+            this.modelstate = error.response.data.errors
+            this.$toast.global.my_error() // Using custom toast
+            this.$toast.error('Error while authenticating')
+            // this.$store.commit('setAuthentication', true)
+          }
+        })
       // try {
       //   const response = await this.$axios.$post(`/api/user/login`, data)
       //   this.$warehouse.set('user', response)
@@ -106,7 +112,6 @@ export default {
       //     // this.$store.commit('setAuthentication', true)
       //   }
       // }
-      this.loginShow = false
     }
   }
 }

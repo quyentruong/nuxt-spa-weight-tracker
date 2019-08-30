@@ -1001,6 +1001,13 @@
   resolved "https://registry.yarnpkg.com/@nuxtjs/recaptcha/-/recaptcha-0.5.3.tgz#cc5b8d4603b216edc9c4af573a9d9bd88bed025a"
   integrity sha512-gn0TQESCT0QzqP/8SUWMODjhatUS9ZwRGz9v3sfTcJONtYhMSOCcKAfd0aOIlpa4fkMLpy0K1Idpbw/mcluhkA==
 
+"@nuxtjs/toast@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/toast/-/toast-3.2.1.tgz#b104c9139d609cf0966287aba38fa430e89d2c09"
+  integrity sha512-unMXSoTrrg6ql4slP41Zasui5UebK6wjSXPyCng4KfSMRnjyuDBODKyundQaMHl9whZYzIi4MZPbKNX376yeIw==
+  dependencies:
+    vue-toasted "^1.1.27"
+
 "@nuxtjs/vuetify@^1.2.1":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/vuetify/-/vuetify-1.4.0.tgz#edc31c1a260d555b6b84c73f14308ea97f64536d"
@@ -8227,6 +8234,11 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue-toasted@^1.1.27:
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/vue-toasted/-/vue-toasted-1.1.27.tgz#ce0a74b875f90c2e4a9e163cce6d5fc37d78a07c"
+  integrity sha512-GVbwInwnqkVxQ4GU/XYeQt1e0dAXL8sF5Hr1H/coCBbYUan5xP0G2mEz/HRDf1lt73rFQAN/bJcLTOKkqiM6tg==
 
 vue-warehouse@^1.0.2:
   version "1.0.2"

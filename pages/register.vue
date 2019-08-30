@@ -70,6 +70,11 @@
                 @change="save"
               />
             </v-menu>
+            <recaptcha
+              @error="onError"
+              @success="onSuccess"
+              @expired="onExpired"
+            />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -104,7 +109,23 @@ export default {
     }
   },
   methods: {
-    Submit () {
+    onError (error) {
+      console.log('Error happened:', error)
+    },
+    onSuccess (token) {
+      console.log('Succeeded:', token)
+    },
+    onExpired () {
+      console.log('Expired')
+    },
+    async Submit () {
+      try {
+        const token = await this.$recaptcha.getResponse()
+        console.log('ReCaptcha token:', token)
+      } catch (error) {
+        console.log('Login error:', error)
+        return
+      }
       this.modelstate = {}
       const data = {
         Name: this.fullName,
