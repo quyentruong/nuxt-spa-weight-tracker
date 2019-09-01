@@ -39,6 +39,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <template v-if="$auth.$state.loggedIn">
+        {{ $auth.$state.user.name }}
         <v-btn @click="logOut">
           Logout
         </v-btn>
@@ -80,6 +81,11 @@ export default {
           icon: 'mdi-account-circle',
           title: 'Profile',
           to: '/profile'
+        },
+        {
+          icon: 'mdi-settings',
+          title: 'Setting',
+          to: '/setting'
         },
         {
           icon: 'mdi-chart-bubble',

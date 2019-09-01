@@ -44,11 +44,11 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" to="/register">
+          <v-btn color="primary" to="/register" :disabled="hasClicked">
             Go to Register
           </v-btn>
           <v-spacer />
-          <v-btn color="primary" @click="Login">
+          <v-btn color="primary" :disabled="hasClicked" @click="Login">
             Login
           </v-btn>
         </v-card-actions>
@@ -63,7 +63,7 @@ export default {
   auth: 'guest',
   name: 'Login',
   data: () => ({
-
+    hasClicked: false,
     modelstate: {},
     email: '',
     password: ''
@@ -79,6 +79,7 @@ export default {
     //   console.log('Expired')
     // },
     async Login () {
+      this.hasClicked = true
       // try {
       //   const token = await this.$recaptcha.getResponse()
       //   console.log('ReCaptcha token:', token)
@@ -94,12 +95,16 @@ export default {
         Password: this.password
       }
       await this.$auth.loginWith('local', { data })
-        .then(() => this.$toast.success('Successfully authenticated', { icon: 'check-bold' }))
+        .then(() => {
+          this.$toast.success('Successfully authenticated', { icon: 'check-bold' })
+          this.hasClicked = false
+        })
         .catch((error) => {
           if (error.response.status === 400) {
             this.modelstate = error.response.data.errors
             this.$toast.global.my_error() // Using custom toast
             this.$toast.error('Error while authenticating')
+            this.hasClicked = false
             // this.$store.commit('setAuthentication', true)
           }
         })
