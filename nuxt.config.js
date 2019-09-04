@@ -13,10 +13,10 @@ const routerBase = process.env.NODE_ENV !== 'development' ? {
 } : {
   env: {
     baseURL: 'https://localhost:5001'
+  },
+  router: {
+    middleware: ['auth']
   }
-  // router: {
-  //   middleware: ['auth']
-  // }
 }
 
 export default {
@@ -98,7 +98,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://trackapi2.azurewebsites.net'}`
+    baseURL: `${process.env.DEPLOY_ENV === 'GH_PAGES' ? 'https://trackapi2.azurewebsites.net' : 'https://localhost:5001'}`
   },
   auth: {
     strategies: {

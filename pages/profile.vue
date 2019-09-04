@@ -94,9 +94,9 @@ export default {
     }
   },
   created () {
-    // this.email = this.$auth.$state.user.email
-    // this.fullname = this.$auth.$state.user.name
-    // this.date = new Date(this.$auth.$state.user.birthDay).toISOString().substr(0, 10)
+    this.email = this.$auth.$state.user.email
+    this.fullname = this.$auth.$state.user.name
+    this.date = new Date(this.$auth.$state.user.birthDay).toISOString().substr(0, 10)
   },
   methods: {
     save (date) {
