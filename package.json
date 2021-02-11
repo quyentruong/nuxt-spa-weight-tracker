@@ -19,7 +19,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/recaptcha": "^0.5.3",
     "@nuxtjs/toast": "^3.2.1",
-    "apexcharts": "^3.8.3",
+    "apexcharts": "^3.24.0",
     "nuxt": "^2.9.2",
     "store": "^2.0.12",
     "vue-apexcharts": "^1.4.0",
